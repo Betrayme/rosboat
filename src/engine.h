@@ -23,6 +23,7 @@ void pwm(int PWMPin, int PWMValue);
 void rangestd();
 void control(int PWMValue);
 int getch(void);
+void turn(int p);
 
 //全局变量声明
 extern int PWMPin;		//2-13引擎Pin

@@ -34,25 +34,29 @@ void control(int PWMValue) //控制函数
 		keyV = getch();
 		if (keyV == UP) {
 			pwm(PWMPin, 200 * gear);
+			turn(0);
 		}
 		else if (keyV == LEFT)
 		{
-
+			turn(-1);
 		}
 		else if (keyV == RIGHT)
 		{
-
+			turn(1);
 		}
 		else if (keyV == LUP || UUP) {
+			turn(0);
 			gear++;
 			if (gear > 5)
 				gear = 5;
+			printf("目前挡位为%d", gear);
 		}
 		else if (keyV == LDOWN || UDOWN) {
+			turn(0);
 			gear--;
 			if (gear < 0)
 				gear = 0;
-
+			printf("目前挡位为%d", gear);
 		}
 		else if (keyV == CANCEL)
 		{
@@ -86,4 +90,26 @@ int getch(void) //getch()函数 Linux可用
 	}
 
 	return ch;
+}
+
+void turn(int p) 
+{
+	if (p == -1) //左						//0.5ms--------------0度；
+	{										//1.0ms------------45度；
+		digitalWrite(SteerPin, HIGH);		//1.5ms------------90度；
+		delayMicroseconds(500); 			//2.0ms---------- - 135度；
+		delayMicroseconds(20000 - 500);		//2.5ms-----------180度；
+	}
+	else if (p == 1) //右 
+	{
+		digitalWrite(SteerPin, HIGH);
+		delayMicroseconds(1500); 		
+		delayMicroseconds(20000 - 1500);
+	}
+	else if (p == 0) //不转
+	{
+		digitalWrite(SteerPin, HIGH);
+		delayMicroseconds(2500);
+		delayMicroseconds(20000 - 2500);
+	}
 }
