@@ -26,6 +26,10 @@ public:
     {
         return newclnt_sock;
     }
+    int& getservsock()
+    {
+        return serv_sock;
+    }
 
     void Close(){       //关闭所有套接字
         close(serv_sock);
@@ -74,6 +78,7 @@ inline TCPServer4::TCPServer4(const char* port)
     {
         cerr<<"listen()->服务端失败!"<<endl;
     }
+    cout<<"@"<<ip<<":"<<port<<" ："<<endl;
 }
 inline TCPServer4::TCPServer4(const char* IP,const char* port)
 {
@@ -104,12 +109,12 @@ inline TCPServer4::TCPServer4(const char* IP,const char* port)
     {
         cerr<<"listen()->服务端失败!"<<endl;
     }
+    cout<<"@"<<ip<<":"<<port<<" ："<<endl;
 }
 
 inline int TCPServer4::addclnt()
 {
     newclnt_sock=accept(serv_sock,(struct sockaddr*)&newclnt_addr,&newclnt_addr_size);
-    cout<<"newclntsock is "<<newclnt_sock<<endl;
     if(newclnt_sock==-1)
     {
         perror("accept");
@@ -122,16 +127,18 @@ inline int TCPServer4::addclnt()
 
 inline int TCPServer4::sendmsg(int sock,char* msg)
 {
-    cout<<"writing to "<<sock<<"..."<<flush;
+    cout<<"sending to client id: "<<sock<<"..."<<flush;
     if(write(sock,msg,sizeof(msg))==-1)
     {
         cerr<<"write()->客户端失败!"<<"客户端描述字为"<<sock<<endl;
         return -1;
     }
+
     cout<<endl;
-    cout<<"writing successfully!"<<endl;
-    fstream ws("./data/log/wmsg.txt",ofstream::out|ofstream::ate);
+    cout<<"sending successfully!"<<endl;
+    fstream ws("./data/log/wmsg.txt",ofstream::out|ofstream::app);
     ws<<strtime()<<":"<<msg<<endl;
+    ws.close();
 
     return 0;
 }

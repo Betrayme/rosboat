@@ -40,7 +40,7 @@ std::string strtime()
     int minutes=p->tm_min;
     int seconds=p->tm_sec;
 
-    ss<<year<<"."<<month<<"."<<day<<" "<<hour<<":"<<minutes<<":"<<seconds;
+    ss<<year<<"."<<month<<"."<<day<<"."<<hour<<":"<<minutes<<":"<<seconds;
     std::string time;
     ss>>time;
     return time;

@@ -7,6 +7,7 @@ int main(int argc, char** argv) {
         cerr<<"参数应为3!"<<endl;
         exit(1);
     }
+
     static TCPClient4* clnt;
     while(1)
     {
@@ -35,7 +36,8 @@ int main(int argc, char** argv) {
             break;
         }
     }
-    if((*clnt).Read()==-1)
+    // sleep(2);
+    if((*clnt).readmsg()==-1)
     {
         perror("read");
         cerr<<"read failed"<<endl;

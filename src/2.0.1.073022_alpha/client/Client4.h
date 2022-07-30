@@ -15,8 +15,8 @@ public:
 
     static TCPClient4* clnt(const char* ip,const char* port);
 
-    int Read();
-    int Write(const char*);
+    int readmsg();
+    int sendmsg(const char*);
 
     ~TCPClient4()   //析构函数
     {
@@ -26,9 +26,6 @@ public:
     {
         return msg;
     }
-    
-    int sendmsg(char*);
-    int readmsg();
 private:
     TCPClient4(int&,sockaddr_in&);  //构造函数
 
@@ -71,16 +68,25 @@ inline TCPClient4::TCPClient4(int& clntsock,sockaddr_in& servaddr)
 
 }
 
-inline int TCPClient4::Read()
+inline int TCPClient4::readmsg()
 {
     msg.clear();
     while(1)
     {
-        if(read(clnt_sock,temsg,sizeof(temsg)-1)==-1)
+        while(1)
         {
-        cerr<<"read failed!"<<endl;
-        return -1;
+            int t=read(clnt_sock,temsg,sizeof(temsg)-1);
+             if(t==-1)
+            {
+                cerr<<"read failed!"<<endl;
+                return -1;
+            }else if(t!=0)
+            {
+                continue;
+            }
+            break;
         }
+
         int i=0;
         for(i=0;temsg[i]!='\0';i++);    //bug:i=8,只读到了"hello wo" 分析:TCP传输数据无边界,当内容比较长时操作系统会将数据分成多个数据包发送，
         if(i==MAXMSG-1)                 //而客户端可能未全部接收所有的数据包就调用read函数导致信息部分丢失!
@@ -98,7 +104,7 @@ inline int TCPClient4::Read()
             fstream rs("./data/log/rmsg.txt",ofstream::out|ofstream::app);
             getline(oofs,msg); //bug(settled):这个语句从文件中以空格为分界输出给了msg   //原码为:oofs>>msg;
             oofs.close();
-            rs<<msg<<"TIME:"<<strtime()<<endl;
+            rs<<msg<<"/TIME:"<<strtime()<<endl;
             rs.close();
             fstream rofs("./data/msg.txt",ifstream::out);
             rofs.close();
@@ -107,7 +113,7 @@ inline int TCPClient4::Read()
     }
 }
 
-inline int TCPClient4::Write(const char* msg)
+inline int TCPClient4::sendmsg(const char* msg)
 {
     while(1)
     {
