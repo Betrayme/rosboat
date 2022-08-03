@@ -1,0 +1,2 @@
+/usr/bin/ar qc librosserv.a  CMakeFiles/rosserv.dir/server.cpp.o CMakeFiles/rosserv.dir/common.cpp.o
+/usr/bin/ranlib librosserv.a
