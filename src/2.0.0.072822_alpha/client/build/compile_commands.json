@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/alvari/Myfile/workspace/client/build",
-  "command": "/usr/bin/g++    -g   -o CMakeFiles/client.dir/client.cpp.o -c /home/alvari/Myfile/workspace/client/client.cpp",
-  "file": "/home/alvari/Myfile/workspace/client/client.cpp"
-}
-]

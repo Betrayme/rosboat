@@ -1,2 +1,0 @@
-/usr/bin/ar qc librosclnt.a  CMakeFiles/rosclnt.dir/client.cpp.o CMakeFiles/rosclnt.dir/makeclnt4.cpp.o
-/usr/bin/ranlib librosclnt.a
