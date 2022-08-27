@@ -1,0 +1,12 @@
+[
+{
+  "directory": "C:/Users/49619/Desktop/serv/build",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\G__~1.EXE   -g -o CMakeFiles\\serv.dir\\serv.cpp.obj -c C:\\Users\\49619\\Desktop\\serv\\serv.cpp",
+  "file": "C:/Users/49619/Desktop/serv/serv.cpp"
+},
+{
+  "directory": "C:/Users/49619/Desktop/serv/build",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\G__~1.EXE   -g -o CMakeFiles\\serv.dir\\interudp4.cpp.obj -c C:\\Users\\49619\\Desktop\\serv\\interudp4.cpp",
+  "file": "C:/Users/49619/Desktop/serv/interudp4.cpp"
+}
+]

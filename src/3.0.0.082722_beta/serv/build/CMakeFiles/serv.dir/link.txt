@@ -1,0 +1,2 @@
+C:\PROGRA~1\mingw64\bin\ar.exe qc libserv.a CMakeFiles/serv.dir/serv.cpp.obj CMakeFiles/serv.dir/interudp4.cpp.obj
+C:\PROGRA~1\mingw64\bin\ranlib.exe libserv.a
