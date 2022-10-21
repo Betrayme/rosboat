@@ -1,0 +1,5 @@
+1.执行sudo apt-get install wiringpi
+2.将wiringpi-latest.deb复制到/tmp下
+3.sudo dpkg -i wiringpi-latest.deb
+4.gpio -v为检验版本命令
+5.gpio readall查找所有gpio接口
